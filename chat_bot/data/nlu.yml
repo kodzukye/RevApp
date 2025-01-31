@@ -24,7 +24,21 @@ nlu:
     - je te remercie pour ton aide
     - je te remercie pour ton assistance
 
-- intent: 
+- intent: prendre_conge
+  examples: |
+    - au revoir
+    - à bientôt
+    - à la prochaine
+    - à plus tard
+    - à demain
+    - à la revoyure
+    - à la revoyure!
+    - à bientôt!
+    - à la prochaine!
+    - à plus tard!
+    - à demain!
+
+
 - intent: analyser_cours
   examples: |
     - Peux-tu analyser ce cours?

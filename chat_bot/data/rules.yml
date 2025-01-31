@@ -12,3 +12,8 @@ rules:
   - intent: remerciements
   - action: utter_remerciements
 
+- rule: Say goodbye
+  steps:
+  - intent: prendre_conge
+  - action: utter_prendre_conge
+
