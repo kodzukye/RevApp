@@ -7,6 +7,6 @@
 <body>
     <h1>Bienvenue sur votre Chatbot de Révision</h1>
 
-    <button><a href="login.php">Commencer</a></button>
+    <button><a href="index.php?page=login">Commencer</a></button>
 </body>
 </html>
