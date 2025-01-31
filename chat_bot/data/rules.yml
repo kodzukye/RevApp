@@ -1,0 +1,14 @@
+version: "3.1"
+
+rules:
+
+- rule: Say hello
+  steps:
+  - intent: saluer
+  - action: utter_saluer
+
+- rule: Say thank you
+  steps:
+  - intent: remerciements
+  - action: utter_remerciements
+

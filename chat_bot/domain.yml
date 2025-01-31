@@ -1,0 +1,43 @@
+version: "3.1"
+
+intents:
+  - demander_question
+  - analyser_cours
+  - saluer
+  - fournir_chemin_pdf
+  - remerciements
+
+responses:
+  utter_greet:
+  - text: "Hey! How are you?"
+
+  utter_saluer:
+  - text: "Bonjour! Je suis un chatbot qui peut vous aider à analyser des cours."
+
+  utter_remerciements:
+  - text: "De rien! Je suis là pour vous aider."
+
+  utter_demander_pdf:
+  - text: "Veuillez me donner le chemin du fichier PDF."
+
+  utter_preparer_question:
+  - text: "Veuillez patienter je prépare des questions pour vous."
+
+actions:
+  - action_capture_pdf_path
+  - action_poser_question
+
+slots:
+  pdf_path:
+    type: text
+    mappings:
+      - type: from_text
+  pdf_content:
+    type: text
+    mappings:
+      - type: from_text
+
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

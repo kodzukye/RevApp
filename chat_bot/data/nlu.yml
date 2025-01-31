@@ -1,0 +1,58 @@
+version: "3.1"
+
+nlu:
+- intent: saluer
+  examples: |
+    - bonjour
+    - salut
+    - coucou
+    - bonsoir
+    - salutations
+    - bonjour!
+    - salut!
+    - coucou!
+    - bonsoir!
+    - salutations!
+
+- intent: remerciements
+  examples: |
+    - merci
+    - merci beaucoup
+    - merci pour ton aide
+    - je te remercie
+    - je te remercie beaucoup
+    - je te remercie pour ton aide
+    - je te remercie pour ton assistance
+
+- intent: analyser_cours
+  examples: |
+    - Peux-tu analyser ce cours?
+    - Analyse ce cours
+    - Génère des questions sur ce cours
+    - Peux tu générer des questions sur ce cours?
+    - Analyse ce document
+    - Analyse ce fichier
+    - Analyse ce pdf
+    - Analyse ce document pdf
+    - Analyse ce fichier pdf
+    - Analyse ce document pdf s'il te plaît
+    - Analyse ce fichier pdf s'il te plaît
+    - Analyse ce document pdf s'il vous plaît
+    - Analyse ce fichier pdf s'il vous plaît
+
+- intent: fournir_chemin_pdf
+  examples: |
+    - C:/Users/Documents/cours.pdf
+    - D:/cours.pdf
+    - ./cours.pdf
+    - cours.pdf
+    - D:/R3.02 - Structure de données complexes _ arbres.pdf
+    - D:/cours/R3.02.pdf
+    - D:/cours/R3.02 - Structure de données complexes _ arbres.pdf
+    - R3.02 - Structure de données complexes _ arbres.pdf
+    - .pdf
+    - Cryptographie.pdf
+    - Cryptographie et securite.pdf
+    - R102.pdf
+    - Gestion_BDD.pdf
+    

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>RevAPP ChatBot</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">RevAPP</div>
+        <div class="actions">
+            <!-- Bouton d'ajout de fichier PDF -->
+            <button class="add-btn">+</button>
+            <!-- Bouton de profil -->
+            <button class="profile-btn">👤</button>
+        </div>
+    </header>
+
+    <main class="chat-container">
+        <!-- Zone des messages -->
+        <div class="messages" id="messageArea">
+            <!-- Message du bot -->
+            <div class="message bot-message">
+                <p>Bonjour ! 😊 Comment puis-je vous aider aujourd'hui ?</p>
+                <!-- Boutons d'action rapide -->
+                <div class="quick-actions">
+                    <button>❓</button>
+                    <button>📁</button>
+                    <button>💡</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Zone de saisie -->
+        <div class="input-area">
+            <input type="text" id="userInput" placeholder="Message ChatBot">
+            <button class="voice-btn">🎤</button>
+            <button class="send-btn">➤</button>
+        </div>
+    </main>
+</body>
+</html>
