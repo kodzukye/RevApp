@@ -93,7 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <div>
                 <label>Prénom :</label>
-                <input type="text" name="prenom" value="<?= htmlspecialchars($_POST['prenom'] ?? '') ?>" required>
+                <input type="text" name="prenom" value="<?= htmlspecialchars(string: $_POST['prenom'] ?? '') ?>" required>
             </div><br>
 
             <div>
