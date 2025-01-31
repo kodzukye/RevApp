@@ -24,6 +24,7 @@ nlu:
     - je te remercie pour ton aide
     - je te remercie pour ton assistance
 
+- intent: 
 - intent: analyser_cours
   examples: |
     - Peux-tu analyser ce cours?
