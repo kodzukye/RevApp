@@ -10,7 +10,7 @@
         <div class="logo">RevAPP</div>
         <div class="actions">
             <!-- Bouton d'ajout de fichier PDF -->
-            <button class="add-btn">+</button>
+            <button class="add-btn" id="pdfButton">+</button>
             <!-- Bouton de profil -->
             <button class="profile-btn">👤</button>
         </div>
@@ -38,5 +38,68 @@
             <button class="send-btn">➤</button>
         </div>
     </main>
+
+    <script>
+        // Gestion du bouton d'ajout PDF
+        document.getElementById('pdfButton').addEventListener('click', function() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.pdf';
+            
+            input.onchange = async function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    // Afficher un message de chargement
+                    displayBotMessage("Chargement du fichier PDF en cours...");
+                    
+                    // Créer un objet FormData pour envoyer le fichier
+                    const formData = new FormData();
+                    formData.append('pdf', file);
+                    
+                    try {
+                        // Envoyer le fichier à RASA
+                        const response = await fetch('http://localhost:5005/webhooks/rest/webhook', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Access-Control-Allow-Origin': '*',
+                                'Accept': 'application/json'
+                            },
+                            mode: 'cors',
+                            body: JSON.stringify({
+                                sender: "user",
+                                message: "lis ce cours",
+                                pdf_path: file.name
+                            })
+                        });
+
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        
+                        const data = await response.json();
+                        // Afficher la réponse de RASA
+                        data.forEach(msg => {
+                            displayBotMessage(msg.text);
+                        });
+                    } catch (error) {
+                        displayBotMessage("Erreur lors de la communication avec le serveur : " + error.message);
+                    }
+                }
+            };
+            
+            input.click();
+        });
+
+        // Fonction pour afficher les messages du bot
+        function displayBotMessage(message) {
+            const messageArea = document.getElementById('messageArea');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message bot-message';
+            messageDiv.innerHTML = `<p>${message}</p>`;
+            messageArea.appendChild(messageDiv);
+            messageArea.scrollTop = messageArea.scrollHeight;
+        }
+    </script>
 </body>
 </html>

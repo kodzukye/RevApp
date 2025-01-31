@@ -42,4 +42,4 @@
 
 action_endpoint:
   url: "http://localhost:5055/webhook"
-  timeout: 300
+  timeout: 3000
