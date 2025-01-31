@@ -18,12 +18,12 @@
         </form>
 
         <div class="button">
-            <button type="submit">S’inscire</button>
+            <button type="submit">Se connecter</button>
         </div>
         
-        <p>Vous n’avez pas de compte ? <a href="registration.php">S’inscire !</a></p>
+        <p>Vous n’avez pas de compte ? <a href="index.php?page=registration">S’inscire !</a></p>
 
-        <a href="forgotten_password.php">Mot de passe oublié ?</a>
+        <a href="index.php?page=forgotten_password">Mot de passe oublié ?</a>
     </div>
 </body>
 </html>
