@@ -25,7 +25,7 @@ responses:
   - text: "Je vous en prie! Je suis là pour vous aider."
   - text: "Pas de quoi! Je suis là pour vous aider."
   - text: "De rien chef! Je suis là pour aider."
-  - text: "T'inquiète pas chef! Je suis là pour aider."	
+  - text: "T'inquiète pas chef! Je suis là pour aider."
 
   utter_demander_pdf:
   - text: "Veuillez me donner le chemin du fichier PDF."
