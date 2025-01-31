@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../config/config.php';
+require_once 'config/config.php';
 
 $errors = [];
 $success = false;
@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($mot_de_passe)) {
         $errors[] = "Le mot de passe est requis";
     } elseif (strlen($mot_de_passe) < 4) {
-        $errors[] = "Le mot de passe doit contenir au moins 4 caractères";
+        $errors[] = "Le mot de passe doit contenir au moins 8 caractères";
     }
 
     if (empty($errors)) {
@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if ($stmt->rowCount() > 0) {
                     $success = true;
                     $_SESSION['inscription_success'] = true;
-                    header("Refresh: 3; url=login.php");
+                    header("Refresh: 3; url=index.php?page=login");
                 }
             }
         } catch (PDOException $e) {
@@ -93,7 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <div>
                 <label>Prénom :</label>
-                <input type="text" name="prenom" value="<?= htmlspecialchars(string: $_POST['prenom'] ?? '') ?>" required>
+                <input type="text" name="prenom" value="<?= htmlspecialchars($_POST['prenom'] ?? '') ?>" required>
             </div><br>
 
             <div>
@@ -110,6 +110,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
     <?php endif; ?>
 
-    <p>Déjà inscrit ? <a href="login.php">Connectez-vous ici</a></p>
+    <p>Déjà inscrit ? <a href="index.php?page=login">Connectez-vous ici</a></p>
 </body>
 </html>
