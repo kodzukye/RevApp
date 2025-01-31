@@ -14,7 +14,7 @@
             <input type="email" placeholder="Nom">
         </form>
 
-        <a href="login.php">Annuler</a>
+        <a href="index.php?page=login">Annuler</a>
 
         <div class="button">
             <button type="submit">Réinitialiser le mot de passe</button>
