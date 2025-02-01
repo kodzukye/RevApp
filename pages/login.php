@@ -32,7 +32,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $user = $checkEmail->fetch();
                 if (password_verify($mot_de_passe, $user['mot_de_passe'])) {
                     $success = true;
-                    $_SESSION['inscription_success'] = true;
                     $_SESSION['email'] = $user['email'];
                     $_SESSION['user_statut'] = 'connected';
                     header('Location: chat_bot/index.php');
