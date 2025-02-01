@@ -12,12 +12,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Validation des champs
     if (empty($email)) {
-        $errors[] = "L'email est requis";
+        $errors[] = "L'email est requis.";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors[] = "Format d'email invalide";
+        $errors[] = "Format d'email invalide.";
     }
     if (empty($mot_de_passe)) {
-        $errors[] = "Le mot de passe est requis";
+        $errors[] = "Le mot de passe est requis.";
     }
 
     if (empty($errors)) {
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $_SESSION['inscription_success'] = true;
                     $_SESSION['email'] = $user['email'];
                     $_SESSION['user_statut'] = 'connected';
-                    header('Refresh: 3; url=index.php?');
+                    header('Location: chat_bot/index.php');
                 } else {
                     $errors[] = "Mot de passe incorrect.";
                 }
@@ -52,30 +52,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <style>
+        .success { color: green; }
+        .error { color: red; }
+    </style>
 </head>
 <body>
-<?php if ($success): ?>
-    <div class="success">
-        <p>Connexion réussie !</p>
-    </div>
-<?php else: ?>
-    <?php if (!empty($errors)): ?>
-        <div class="error">
-            <?php foreach ($errors as $error): ?>
-                <p><?= htmlspecialchars($error) ?></p>
-            <?php endforeach; ?>
-        </div>
-    <?php endif; ?>
-    <div>
+    <div class="container">
 
-        <h1>Bienvenue</h1>
+        <h1 class="title">Bienvenue</h1>
         
         <form action="" method="post">
             <label for="email"> Email </label>
-            <input type="email" name="email" id="email" required>
+            <input type="email" name="email" id="email" placeholder="E-mail" required>
 
             <label for="mot_de_passe"> Mot de passe </label>
-            <input type="password" name="mot_de_passe" id="email" required minlength="4">
+            <input type="password" name="mot_de_passe" id="email" required minlength="4" placeholder="Mot de passe">
+
+            <?php if (!empty($errors)): ?>
+                <div class="error">
+                    <?php foreach ($errors as $error): ?>
+                        <p><?= htmlspecialchars($error) ?></p>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
 
             <div class="button">
                 <button type="submit" id="login" value="login">Se connecter</button>
@@ -86,6 +87,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <a href="index.php?page=forgotten_password">Mot de passe oublié ?</a>
     </div>
-    <?php endif; ?>
+
 </body>
 </html>
