@@ -103,7 +103,6 @@ button {
     border-style: none;
     font-weight: lighter;
     font-size: 17px;
-    margin-top: 5px; 
     transition: all 0.3s ease;
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
 }

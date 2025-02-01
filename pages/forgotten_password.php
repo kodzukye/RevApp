@@ -19,11 +19,8 @@
         <form action="" method="post">
             <label for="email"> Email </label>
             <input type="email" placeholder="E-mail" name="email" required>
-
-            <div class="button">
-                <button type="submit">Réinitialiser le mot de passe</button>
-                <button><a href="index.php?page=login">Retour</a></button>
-            </div>
+            <button type="submit">Réinitialiser le mot de passe</button>
         </form>
+        <button><a href="index.php?page=login">Retour</a></button>
     </div>
 </html>
