@@ -75,34 +75,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <h1 class="title">Formulaire d'inscription</h1>
 
         <?php if ($success): ?>
-            <div class="success">
-                <p>Inscription réussie ! Redirection vers la page de connexion dans 3 secondes...</p>
-            </div>
+        <div class="success">
+            <p>Inscription réussie ! Redirection vers la page de connexion dans 3 secondes...</p>
+        </div>
         <?php else: ?>
-            <?php if (!empty($errors)): ?>
-                <div class="error">
-                    <?php foreach ($errors as $error): ?>
-                        <p><?= htmlspecialchars($error) ?></p>
-                    <?php endforeach; ?>
-                </div>
-            <?php endif; ?>
+        <?php if (!empty($errors)): ?>
+        <div class="error">
+            <?php foreach ($errors as $error): ?>
+                <p><?= htmlspecialchars($error) ?></p>
+            <?php endforeach; ?>
+        </div>
+        <?php endif; ?>
 
-            <form method="post">
+        <form method="post">
 
-                <label>Nom</label>
-                <input type="text" name="nom" value="<?= htmlspecialchars($_POST['nom'] ?? '') ?>" placeholder="Nom" required>
+            <label>Nom</label>
+            <input type="text" name="nom" value="<?= htmlspecialchars($_POST['nom'] ?? '') ?>" placeholder="Nom" required>
 
-                <label>Prénom</label>
-                <input type="text" name="prenom" value="<?= htmlspecialchars($_POST['prenom'] ?? '') ?>" placeholder="Prénom" required>
+            <label>Prénom</label>
+            <input type="text" name="prenom" value="<?= htmlspecialchars($_POST['prenom'] ?? '') ?>" placeholder="Prénom" required>
 
-                <label>Email</label>
-                <input type="email" name="email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" placeholder="E-mail" required>
+            <label>Email</label>
+            <input type="email" name="email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" placeholder="E-mail" required>
 
-                <label>Mot de passe</label>
-                <input type="password" name="mot_de_passe" placeholder="Mot de passe" required minlength="4">
+            <label>Mot de passe</label>
+            <input type="password" name="mot_de_passe" placeholder="Mot de passe" required minlength="4">
 
-                <button type="submit">S'inscrire</button>
-            </form>
+            <button type="submit">S'inscrire</button>
+        </form>
         <?php endif; ?>
 
         <p>Déjà inscrit ? <a href="index.php?page=login">Connectez-vous ici</a></p>
