@@ -14,6 +14,14 @@ nlu:
     - bonsoir!
     - salutations!
 
+- intent: moyen_age
+  examples: |
+    - Salutations très cher
+    - Mes hômages
+    - Bonjour paysan
+
+
+
 - intent: remerciements
   examples: |
     - merci

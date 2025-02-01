@@ -17,3 +17,8 @@ rules:
   - intent: prendre_conge
   - action: utter_prendre_conge
 
+- rule: moyen_age
+  steps:
+  - intent: moyen_age
+  - action: utter_moyen_age
+
