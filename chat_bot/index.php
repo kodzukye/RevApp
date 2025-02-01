@@ -4,6 +4,13 @@ $rasa_server_url = "http://localhost:5005/webhooks/rest/webhook";
 
 // Initialiser la session pour stocker l'historique de la conversation
 session_start();
+
+if (!isset($_SESSION['user_statut'])) {
+    header('Location: ../index.php?page=login');
+} else if ($_SESSION['user_statut'] !== 'connected') {
+    header('Location: ../index.php?page=login');
+}
+
 if (!isset($_SESSION['chat_history'])) {
     $_SESSION['chat_history'] = [];
 }
