@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($mot_de_passe)) {
         $errors[] = "Le mot de passe est requis";
     } elseif (strlen($mot_de_passe) < 4) {
-        $errors[] = "Le mot de passe doit contenir au moins 8 caractères";
+        $errors[] = "Le mot de passe doit contenir au moins 4 caractères";
     }
 
     if (empty($errors)) {
@@ -64,52 +64,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Inscription</title>
+    <link rel="stylesheet" href="styles/registration.css">
     <style>
         .success { color: green; }
         .error { color: red; }
     </style>
 </head>
 <body>
-    <h2>Formulaire d'inscription</h2>
+    <div class="container">
+        <h1 class="title">Formulaire d'inscription</h1>
 
-    <?php if ($success): ?>
+        <?php if ($success): ?>
         <div class="success">
             <p>Inscription réussie ! Redirection vers la page de connexion dans 3 secondes...</p>
         </div>
-    <?php else: ?>
+        <?php else: ?>
         <?php if (!empty($errors)): ?>
-            <div class="error">
-                <?php foreach ($errors as $error): ?>
-                    <p><?= htmlspecialchars($error) ?></p>
-                <?php endforeach; ?>
-            </div>
+        <div class="error">
+            <?php foreach ($errors as $error): ?>
+                <p><?= htmlspecialchars($error) ?></p>
+            <?php endforeach; ?>
+        </div>
         <?php endif; ?>
 
-        <form method="post">
-            <div>
-                <label>Nom :</label>
-                <input type="text" name="nom" value="<?= htmlspecialchars($_POST['nom'] ?? '') ?>" required>
-            </div><br>
+            <form action="" method="post">
 
-            <div>
-                <label>Prénom :</label>
-                <input type="text" name="prenom" value="<?= htmlspecialchars($_POST['prenom'] ?? '') ?>" required>
-            </div><br>
+            <label>Nom</label>
+            <input type="text" name="nom" value="<?= htmlspecialchars($_POST['nom'] ?? '') ?>" placeholder="Nom" required>
 
-            <div>
-                <label>Email :</label>
-                <input type="email" name="email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" required>
-            </div><br>
+            <label>Prénom</label>
+            <input type="text" name="prenom" value="<?= htmlspecialchars($_POST['prenom'] ?? '') ?>" placeholder="Prénom" required>
 
-            <div>
-                <label>Mot de passe :</label>
-                <input type="password" name="mot_de_passe" required minlength="4">
-            </div><br>
+            <label>Email</label>
+            <input type="email" name="email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" placeholder="E-mail" required>
+
+            <label>Mot de passe</label>
+            <input type="password" name="mot_de_passe" placeholder="Mot de passe" required minlength="4">
 
             <button type="submit">S'inscrire</button>
         </form>
-    <?php endif; ?>
+        <?php endif; ?>
 
-    <p>Déjà inscrit ? <a href="index.php?page=login">Connectez-vous ici</a></p>
+        <p>Déjà inscrit ? <a href="index.php?page=login">Connectez-vous ici</a></p>
+    </div>
 </body>
 </html>
