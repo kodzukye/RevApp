@@ -22,3 +22,8 @@ rules:
   - intent: moyen_age
   - action: utter_moyen_age
 
+- rule: famillier
+  steps:
+  - intent: famillier
+  - action: utter_famillier
+
