@@ -6,18 +6,15 @@
 </head>
 <body>
     <div>
-
         <h1>Mot de passe oublié</h1>
 
         <form action="" method="post">
             <label for="email"> Email </label>
             <input type="email" placeholder="Nom">
-        </form>
 
-        <a href="index.php?page=login">Annuler</a>
+            <a href="index.php?page=login">Annuler</a>
 
-        <div class="button">
             <button type="submit">Réinitialiser le mot de passe</button>
-        </div>
+        </form>
     </div>
 </html>

@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $_SESSION['inscription_success'] = true;
                     $_SESSION['email'] = $user['email'];
                     $_SESSION['user_statut'] = 'connected';
-                    header('Refresh: 3; url=index.php?page=home');
+                    header('Refresh: 3; url=index.php?');
                 } else {
                     $errors[] = "Mot de passe incorrect.";
                 }
@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 <?php if ($success): ?>
     <div class="success">
-        <p>Inscription réussie ! Redirection vers la page de connexion dans 3 secondes...</p>
+        <p>Connexion réussie !</p>
     </div>
 <?php else: ?>
     <?php if (!empty($errors)): ?>
