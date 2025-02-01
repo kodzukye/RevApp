@@ -4,9 +4,11 @@ intents:
   - demander_question
   - analyser_cours
   - saluer
+  - moyen_age
   - fournir_chemin_pdf
   - remerciements
   - prendre_conge
+  - famillier
 
 responses:
   utter_greet:
@@ -16,9 +18,30 @@ responses:
   - text: "Bonjour! Je suis un chatbot qui peut vous aider à réviser tes cours."
   - text: "Salut! Je suis un chatbot qui peut vous aider à réviser tes cours."
   - text: "Coucou! Je suis un chatbot qui peut vous aider à réviser tes cours."
-  - text: "Salut chef ! Je suis un chatbot qui peut t'aider à réviser tes cours."
-  - text: "Bonjour chef ! Je suis un chatbot qui peut t'aider à réviser tes cours."
-  
+  - text: "Salut"
+  - text: "Bonjour"
+  - text: "Coucou"
+  - text: "Salut!"
+  - text: "Bonjour!"
+  - text: "Coucou!"
+
+  utter_moyen_age:
+  - text: "Mes hômage ô cher maitre!"
+  - text: "Je suis honerer de votre présence!"
+  - text: "Je m'incline face à sa majesté!"
+  - text: "La petitesse de l'humble bot que je suis ne peut rivaliser avec votre grandeur!"
+  - text: "Je salut le maitre de cette conversation!"
+
+  utter_famillier:
+  - text: "Salut chef!"
+  - text: "Bonjour chef!"
+  - text: "ça dit quoi la chienneté ?"
+  - text: "Salut chef! Comment va?"
+  - text: "Bonjour chef! Comment ça va?"
+  - text: "Ho dogo bien ou quoi ?"
+  - text: "Salut chef! Comment tu vas?"
+  - text: "Bien ou la famille?"
+
 
   utter_remerciements:
   - text: "De rien! Je suis là pour vous aider."
@@ -26,6 +49,7 @@ responses:
   - text: "Pas de quoi! Je suis là pour vous aider."
   - text: "De rien chef! Je suis là pour aider."
   - text: "T'inquiète pas chef! Je suis là pour aider."
+  
 
   utter_demander_pdf:
   - text: "Veuillez me donner le chemin du fichier PDF."
