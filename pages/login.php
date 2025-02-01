@@ -1,6 +1,7 @@
 <?php
 session_start();
-require_once 'config/config.php';
+
+require_once '../config/config.php';
 
 $errors = [];
 $success = false;
@@ -52,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="../styles/style.css">
     <style>
         .success { color: green; }
         .error { color: red; }
@@ -61,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div class="container">
 
-        <h1 class="title">Bienvenue</h1>
+        <h1 class="title">Bienvenue</h1><br>
         
         <form action="" method="post">
             <label for="email"> Email </label>
@@ -83,9 +84,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </form>
 
+        <div class ="complement">
         <p>Vous n’avez pas de compte ? <a href="index.php?page=registration">S’inscire !</a></p>
 
         <a href="index.php?page=forgotten_password">Mot de passe oublié ?</a>
+        </div>
     </div>
 
 </body>
