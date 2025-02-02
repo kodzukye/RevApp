@@ -42,7 +42,7 @@ responses:
   - text: "Salut chef! Comment tu vas?"
   - text: "Bien ou la famille?"
 
-responses:
+
   utter_interroger_curiosite:
     - text: "Je suis une IA entraînée pour t'assister dans tes révision. Pose-moi toutes tes questions ! 🤖"
 

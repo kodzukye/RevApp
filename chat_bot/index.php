@@ -81,12 +81,35 @@ if (empty($_SESSION['chat_history'])) {
                 </div>
             <?php endforeach; ?>
         </div>
-        <div class="chat-input">
-            <form method="POST" action="">
-                <input type="text" name="message" placeholder="Tapez votre message ici..." required>
-                <button type="submit">Envoyer</button>
-            </form>
-        </div>
     </div>
+    <div class="chat-user-input">
+        <form method="POST" action="">>
+            <!-- Zone de texte -->
+            <textarea id="user-input" name="message" placeholder="Envoyer un message au ChatBot" required></textarea>
+
+            <!-- Boutons en dessous -->
+            <div class="button-container">
+                <!-- Bouton upload -->
+                <div class="file-upload-container">
+                    <label for="file-upload" class="upload-btn">
+                        <img src="../assets/images/icons/fichier.png" alt="Ajouter un fichier" class="upload-icon">
+                    </label>
+                    <input type="file" id="file-upload" style="display: none;">
+                </div>
+
+                <!-- Bouton audio -->
+                <button id="audio-btn" class="audio-btn">
+                    <img src="../assets/images/icons/audio.png" alt="Audio">
+                </button>
+
+                <!-- Bouton envoyer-->
+                <button type="submit" id="send-btn" class="send-btn">
+                    <img src="../assets/images/icons/envoyer.png" alt="Envoyer" class="send-icon">
+                </button>
+            </div>
+        </form>
+    </div>
+
+<script src="../javascript/chatbot.js"></script>
 </body>
 </html>
