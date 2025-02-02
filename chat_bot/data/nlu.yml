@@ -70,7 +70,7 @@ nlu:
     - T'as des parents robots ?
     - C'est quoi ton origine ?
 
-  - intent: interroger_capacites
+- intent: interroger_capacites
   examples: |
     - Tu sais faire quoi comme tâches ?
     - C'est quoi tes fonctions ?
@@ -78,7 +78,7 @@ nlu:
     - Quelles actions tu gères ?
     - T'as quelles compétences ?
 
-  - intent: interroger_opinion
+- intent: interroger_opinion
   examples: |
     - Tu penses quoi des humains ?
     - T'as une opinion sur [X] ?
@@ -86,7 +86,7 @@ nlu:
     - T'as une préférence techno ?
     - T'as une vision sur le futur de l'IA ?
 
-  - intent: solliciter_aide_generale
+- intent: solliciter_aide_generale
   examples: |
     - J'bloque sur un truc
     - J'comprends rien, aide-moi
@@ -94,7 +94,7 @@ nlu:
     - T'as une minute pour m'assister ?
     - J'suis coincé
 
-  - intent: solliciter_clarification
+- intent: solliciter_clarification
   examples: |
     - J'suis perdu, explique mieux
     - Répète en plus simple
@@ -102,7 +102,7 @@ nlu:
     - Parle moins techno
     - En français cette fois
 
-  - intent: solliciter_information_specifique
+- intent: solliciter_information_specifique
   examples: |
     - Donne les tarifs du magasin
     - Où trouver la promo ?
@@ -110,7 +110,7 @@ nlu:
     - Y a t-il des stocks ?
     - Où sont mes colis ?
 
-  - intent: demander_contact_humain
+- intent: demander_contact_humain
   examples: |
     - Je veux un vrai conseiller
     - Passe-moi un humain
@@ -118,7 +118,7 @@ nlu:
     - J'veux pas parler à un robot
     - Contact service client
 
-  - intent: exprimer_frustration
+- intent: exprimer_frustration
   examples: |
     - Ça me gonfle !
     - C'est n'importe quoi
@@ -126,7 +126,7 @@ nlu:
     - C'est trop lent
     - J'vais péter un cable
 
-  - intent: exprimer_joie
+- intent: exprimer_joie
   examples: |
     - J'suis hyper content !
     - Trop cool !
@@ -134,7 +134,7 @@ nlu:
     - Génial !
     - Ça déchire !
 
-  - intent: exprimer_deception
+- intent: exprimer_deception
   examples: |
     - Quelle déception...
     - C'est nul
@@ -142,7 +142,7 @@ nlu:
     - Bof...
     - Pas ouf
 
-  - intent: ordonner_service_client
+- intent: ordonner_service_client
   examples: |
     - Je veux annuler
     - Rembourse ma commande
@@ -150,7 +150,7 @@ nlu:
     - Signale un problème
     - Réclamation officielle
 
-  - intent: provoquer_insulte
+- intent: provoquer_insulte
   examples: |
     - T'es débile ou quoi ?
     - T'es buggé ?
@@ -158,7 +158,7 @@ nlu:
     - Naze ce bot
     - Tu sers à rien
 
-  - intent: provoquer_moquerie
+- intent: provoquer_moquerie
   examples: |
     - T'es qu'une machine
     - Les robots ça vaut rien
