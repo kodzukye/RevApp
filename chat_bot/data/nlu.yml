@@ -141,6 +141,8 @@ nlu:
     - J'm'attendais à mieux
     - Bof...
     - Pas ouf
+    - Dommage
+    - C'est vraiment dommage...
 
 - intent: ordonner_service_client
   examples: |
@@ -157,6 +159,9 @@ nlu:
     - T'es mal codé
     - Naze ce bot
     - Tu sers à rien
+    - Je te hais
+    - Je te déteste
+    - Je ne t'aime pas du tout
 
 - intent: provoquer_moquerie
   examples: |
@@ -165,6 +170,8 @@ nlu:
     - T'es pas futé
     - T'as 2 neurones ?
     - Même mon chat code mieux
+    - T'es bête ou quoi
+    - T'es con ou quoi
 
 - intent: demander_info_externe
   examples: |
