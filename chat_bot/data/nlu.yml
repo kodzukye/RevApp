@@ -182,7 +182,8 @@ nlu:
     - Trouve-moi un bon resto à Paris
     - Quelle est la capitale de la Finlande ?
     - Tu connais ChatGPT ?
-      
+
+
   ########
 
 - intent: remerciements
