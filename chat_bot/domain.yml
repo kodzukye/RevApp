@@ -22,6 +22,7 @@ intents:
   - ordonner_service_client
   - provoquer_insulte
   - provoquer_moquerie
+  - demander_info_externe
 
 responses:
   utter_greet:
@@ -99,11 +100,6 @@ responses:
     - text: "Mon cerveau est focus sur les PDF pour l'instant ! 🧠 Je pourrai peut-être t'aider avec ça dans une prochaine mise à jour 😉"
     - text: "Pas encore équipé pour ça... Mais je note l'idée pour la V2 ! 📝"
     - text: "Hors de ma zone d'expertise actuelle, mais mes devs travaillent dur pour m'améliorer 💪"
-
-  # Réponses conversationnelles basiques
-  utter_parler_meteo:
-    - text: "Aucune idée du temps qu'il fait, mais je peux t'aider à analyser des nuages de mots dans ton PDF ! ☁️"
-
 
   # Fallback par défaut
   utter_default:
