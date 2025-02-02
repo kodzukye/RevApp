@@ -7,6 +7,13 @@ stories:
   - intent: saluer
   - action: utter_saluer
 
+- story: Chemin de clarification
+  steps:
+  - intent: solliciter_clarification
+  - action: utter_solliciter_clarification
+  - intent: informer
+  - action: utter_merci
+
 - story: Analyse cours
   steps:
   - intent: analyser_cours
