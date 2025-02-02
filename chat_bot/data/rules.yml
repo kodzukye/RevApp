@@ -7,6 +7,75 @@ rules:
   - intent: saluer
   - action: utter_saluer
 
+- rule: Répondre aux questions de curiosité
+  steps:
+  - intent: interroger_curiosite
+  - action: utter_interroger_curiosite
+
+- rule: Expliquer les capacités
+  steps:
+  - intent: interroger_capacites
+  - action: utter_interroger_capacites
+
+- rule: Offrir une aide générale
+  steps:
+  - intent: solliciter_aide_generale
+  - action: utter_solliciter_aide_generale
+
+# Règles émotionnelles
+- rule: Gérer la frustration
+  steps:
+  - intent: exprimer_frustration
+  - action: utter_exprimer_frustration
+
+- rule: Accueillir la joie
+  steps:
+  - intent: exprimer_joie
+  - action: utter_exprimer_joie
+
+- rule: Répondre à la déception
+  steps:
+  - intent: exprimer_deception
+  - action: utter_exprimer_deception
+
+# Règles techniques
+- rule: Transférer au service client
+  steps:
+  - intent: ordonner_service_client
+  - action: utter_ordonner_service_client
+
+- rule: Rediriger vers humain
+  steps:
+  - intent: demander_contact_humain
+  - action: utter_demander_contact_humain
+
+# Règles de conflit
+- rule: Désamorcer les insultes
+  steps:
+  - intent: provoquer_insulte
+  - action: utter_provoquer_insulte
+
+- rule: Répondre aux moqueries
+  steps:
+  - intent: provoquer_moquerie
+  - action: utter_provoquer_moquerie
+
+# Règle de clarification
+- rule: Clarifier la demande
+  steps:
+  - intent: solliciter_clarification
+  - action: utter_solliciter_clarification
+  # Ajouter une logique de suivi ici si nécessaire
+
+# Fallback
+- rule: Politique de fallback
+  conversation_start: true
+  condition:
+  - active_loop: null
+  steps:
+  - intent: nlu_fallback
+  - action: utter_default
+
 - rule: Say thank you
   steps:
   - intent: remerciements
