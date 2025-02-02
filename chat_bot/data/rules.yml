@@ -12,6 +12,16 @@ rules:
   - intent: interroger_curiosite
   - action: utter_interroger_curiosite
 
+- rule: Répondre aux questions spécifique 
+  steps:
+  - intent: solliciter_information_specifique
+  - action: utter_solliciter_information_specifique
+
+- rule: Répondre aux intérogation sur opinion perso
+  steps:
+  - intent: interroger_opinion
+  - action: utter_interroger_opinion
+
 - rule: Expliquer les capacités
   steps:
   - intent: interroger_capacites
