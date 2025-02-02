@@ -81,7 +81,7 @@ rules:
   steps:
     - intent: demander_info_externe
     - action: utter_info_non_disponible
-    - action: action_retour_pdf  # Action custom pour ramener vers les PDF
+    - action: utter_demander_pdf  # Action custom pour ramener vers les PDF
 
 - rule: Relancer sur les PDF après hors-sujet
   steps:
