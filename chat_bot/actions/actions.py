@@ -1,152 +1,152 @@
-# This files contains your custom actions which can be used to run
-# custom Python code.
-#
-# See this guide on how to implement these action:
-# https://rasa.com/docs/rasa/custom-actions
-
-
-# This is a simple example for a custom action which utters "Hello World!"
-
-from rasa_sdk import Action
+# actions.py
+from rasa_sdk import Action, Tracker
 from rasa_sdk.events import SlotSet
-import fitz
-from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
-import random
+from rasa_sdk.executor import CollectingDispatcher
+from typing import Text, List, Dict, Any
+import fitz  # PyMuPDF
+import google.generativeai as genai
+from sentence_transformers import SentenceTransformer, util
+import os
+from dotenv import load_dotenv
+load_dotenv()  # Charge les variables du fichier .env
 
+
+# Configuration Gemini
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))  # À mettre dans les variables d'environnement
+MODEL_NAME = 'gemini-1.5-flash'
+SEMANTIC_MODEL = "dangvantuan/sentence-camembert-base"
 
 class ActionCapturePdfPath(Action):
-    def name(self) -> str:
+    def name(self) -> Text:
         return "action_capture_pdf_path"
-    
-    def run(self, dispatcher, tracker, domain):
-        # Récupérer le dernier message de l'utilisateur
-        message = tracker.latest_message.get("text")
 
-        #sauvegarder le chemin dans le slot pdf_path
+    def run(self, dispatcher, tracker, domain):
+        message = tracker.latest_message.get("text")
         return [SlotSet("pdf_path", message)]
 
-class PoserQuestion(Action):
+class ActionAnalysePDF(Action):
     def __init__(self):
-        self.model_name = "lincoln/barthez-squadFR-fquad-piaf-question-generation"
-        self.model = AutoModelForSeq2SeqLM.from_pretrained(self.model_name)
-        self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
-        self.prompts_variés = [
-            "À partir du texte suivant, pose une question approfondie : ",
-            "Quelle question pertinente peut-on déduire du contenu suivant : ",
-            "Formule une question détaillée basée sur ce passage : ",
-            "Génère une question complexe à propos de : ",
-            "Quelle question pourrait-on poser concernant ce texte : ",
-            "À partir de ce texte, formule une question détaillée : ",
-            "Voici un passage, propose une question pertinente : "
-        ]
+        self.model = genai.GenerativeModel(MODEL_NAME)
+        self.semantic_model = SentenceTransformer(SEMANTIC_MODEL)
 
-    def name(self) -> str:
-        return "action_poser_question"
+    def name(self) -> Text:
+        return "action_analyser_cours"
 
-    def diviser_texte_en_sections(self, texte, longueur_max=300):
-        sections = []
-        paragraphes = texte.split("\n\n")
-        section_actuelle = ""
-        for paragraphe in paragraphes:
-            if len(section_actuelle) + len(paragraphe) <= longueur_max:
-                section_actuelle += paragraphe + "\n\n"
-            else:
-                sections.append(section_actuelle.strip())
-                section_actuelle = paragraphe + "\n\n"
-        if section_actuelle:
-            sections.append(section_actuelle.strip())
-        return sections
-
-    def generate_question_with_context(self, text):
-        prompt = random.choice(self.prompts_variés)
-        input_text = f"{prompt}{text}"
-        input_ids = self.tokenizer.encode(input_text, return_tensors="pt", max_length=512, truncation=True)
-        outputs = self.model.generate(
-            input_ids,
-            max_length=64,
-            num_return_sequences=1,
-            do_sample=True,
-            top_k=50,
-            top_p=0.95,
-            temperature=1.3
-        )
-        return self.tokenizer.decode(outputs[0], skip_special_tokens=True)
-
-    def generate_qcm_from_sections(self, sections, num_questions_per_section=2):
-        qcm = []
-        for section in sections:
-            for _ in range(num_questions_per_section):
-                question = self.generate_question_with_context(section)
-                if "?" in question:
-                    qcm.append(question)
-        return self.remove_duplicate_questions(qcm)
-
-    def remove_duplicate_questions(self, qcm):
-        longueur_qcm = len(qcm) - 1
-        # Parcours la liste qcm question par question via leurs index
-        for index_prcp_question in range(longueur_qcm):
-            # Arrête la principale boucle si l'index de la question est supérieur ou égale à la longueur de la liste
-            if index_prcp_question >= longueur_qcm:
-                break
-
-
-            for index_scde_question in range(0, longueur_qcm + 1):
-
-                # Arrête la boucle si les index de la question ou de la seconde question sont supérieur à la longueur de la liste 
-                if (index_scde_question > longueur_qcm) or (index_prcp_question > longueur_qcm):
-                    break
-
-                # Ignore si les index de la question principale et secondaire sont égaux
-                if (index_prcp_question == index_scde_question):
-                    continue
-
-                # Efface la question secondaire de la liste qcm si elle est égale à la question principale et la soustrait à la longeur de la liste
-                if qcm[index_prcp_question] == qcm[index_scde_question]:
-                    qcm.remove(qcm[index_scde_question])
-                    longueur_qcm -= 1
-                    continue
-
-                # Arrête la boucle secondaire si l'index de la question secondaire est supérieur ou égale à la longeur de la liste 
-                if (index_scde_question >= longueur_qcm):
-                    break
-
-                # Efface la question secondaire de la liste qcm si elle est égal à la question qui la succède et la soustrait à la longeur de la liste
-                if qcm[index_scde_question + 1] == qcm[index_scde_question]:
-                    qcm.remove(qcm[index_scde_question])
-                    longueur_qcm -= 1
-                    continue
-
-                # Supprimer la question principal si elle ne contient pas d'espace avant un " ?"
-                if qcm[index_prcp_question][-2] != ' ':
-                    qcm.remove(qcm[index_prcp_question])
-                    longueur_qcm -= 1 
-                    continue
-        return qcm
-
-    def run(self, dispatcher, tracker, domain):
+    def _extraire_contenu_pdf(self, chemin: Text) -> Text:
+        """Extraction PDF optimisée avec PyMuPDF"""
         try:
-            chemin_pdf = tracker.get_slot("pdf_path")
-            if not chemin_pdf:
-                dispatcher.utter_message("Veuillez d'abord me donner le chemin du fichier PDF.")
-                return []
-
-            document = fitz.open(chemin_pdf)
-            texte_complet = ""
-            for numero_page, page in enumerate(document, start=1):
-                texte = page.get_text()
-                texte_complet += f"\n--- Page {numero_page} ---\n{texte}"
-            document.close()
-
-            sections = self.diviser_texte_en_sections(texte_complet)
-            
-            questions = self.generate_qcm_from_sections(sections, 5)
-            
-            dispatcher.utter_message("Voici les questions générées :")
-            for i, question in enumerate(questions, 1):
-                dispatcher.utter_message(f"Question {i}: {question}")
-
-            return [SlotSet("pdf_content", texte_complet)]
-        
+            doc = fitz.open(chemin)
+            contenu = []
+            for page in doc:
+                text_dict = page.get_text("dict", flags=fitz.TEXT_PRESERVE_LIGATURES)
+                for block in text_dict["blocks"]:
+                    if "lines" in block:
+                        for line in block["lines"]:
+                            line_text = "".join([span["text"] for span in line["spans"]])
+                            contenu.append(line_text)
+            return '\n'.join(contenu)
         except Exception as e:
-            dispatcher.utter_message(f"Erreur lors de la génération des questions : {e}")
+            raise ValueError(f"Erreur lecture PDF : {str(e)}")
+
+    def _generer_question(self, contexte: Text) -> Text:
+        """Génération de question via Gemini"""
+        try:
+            prompt = f"Génère une question technique en français basée sur : {contexte[:2000]}"
+            response = self.model.generate_content(prompt)
+            return response.text.strip()
+        except Exception as e:
+            raise RuntimeError(f"Erreur Gemini : {str(e)}")
+
+    def _generer_reponse_ref(self, question: Text) -> Text:
+        """Génération de la réponse de référence"""
+        try:
+            prompt = f"Donne une réponse concise à : {question}"
+            response = self.model.generate_content(prompt)
+            return response.text.strip()
+        except Exception as e:
+            return "Réponse non disponible"
+
+    def _evaluer_reponse(self, question: Text, reponse: Text, reference: Text) -> bool:
+        """Évaluation sémantique des réponses"""
+        embeddings = self.semantic_model.encode([question, reponse, reference])
+        similarite = util.cos_sim(embeddings[1], embeddings[2]).item()
+        return similarite > 0.65
+
+    async def run(self, dispatcher, tracker, domain):
+        pdf_path = tracker.get_slot("pdf_path")
+        
+        if not pdf_path:
+            dispatcher.utter_message("Veuillez fournir un chemin PDF valide.")
             return []
+
+        try:
+            contexte = self._extraire_contenu_pdf(pdf_path)
+            questions = [self._generer_question(contexte) for _ in range(5)]
+            
+            # Stocker les questions dans le slot
+            tracker.slots["questions"] = questions
+            tracker.slots["current_question"] = 0
+            
+            # Poser la première question
+            dispatcher.utter_message(f"Question 1: {questions[0]}")
+            return [SlotSet("questions", questions), SlotSet("current_question", 0)]
+
+        except Exception as e:
+            dispatcher.utter_message(f"Erreur : {str(e)}")
+            return []
+# Ajouter en haut du fichier
+# Correction nécessaire
+class PDFUtils:
+    def __init__(self):
+        self.semantic_model = SentenceTransformer(SEMANTIC_MODEL)
+    
+    def evaluer_reponse(self, question: Text, reponse: Text, reference: Text) -> bool:
+        embeddings = self.semantic_model.encode([question, reponse, reference])
+        similarite = util.cos_sim(embeddings[1], embeddings[2]).item()
+        return similarite > 0.65
+
+
+
+class ActionGererReponse(Action):
+    def __init__(self):
+        self.utils = PDFUtils()  # Initialisation correcte
+        self.model = genai.GenerativeModel(MODEL_NAME)
+
+    def name(self) -> Text:
+        return "action_gerer_reponse"
+
+    async def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        current_idx = tracker.get_slot("current_question") or 0
+        questions = tracker.get_slot("questions")
+        
+        if not questions or current_idx >= len(questions):
+            dispatcher.utter_message("Aucune question en cours.")
+            return []
+
+        reponse = tracker.latest_message.get("text")
+        question = questions[current_idx]
+
+        try:
+            # Génération réponse de référence
+            reponse_ref = self.model.generate_content(
+                f"Réponse courte à : {question}"
+            ).text.strip()
+
+            # Évaluation
+            if self.utils.evaluer_reponse(question, reponse, reponse_ref):
+                dispatcher.utter_message("✅ Correct !")
+            else:
+                dispatcher.utter_message(f"❌ Réponse attendue : {reponse_ref}")
+
+            # Passage à la question suivante
+            if current_idx < len(questions) - 1:
+                new_idx = current_idx + 1
+                dispatcher.utter_message(f"Question {new_idx + 1}: {questions[new_idx]}")
+                return [SlotSet("current_question", new_idx)]
+            
+            return [SlotSet("current_question", None), SlotSet("questions", None)]
+
+        except Exception as e:
+            dispatcher.utter_message(f"Erreur d'évaluation : {str(e)}")
+            return []
+
