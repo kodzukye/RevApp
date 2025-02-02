@@ -166,6 +166,16 @@ nlu:
     - T'as 2 neurones ?
     - Même mon chat code mieux
 
+- intent: demander_info_externe
+  examples: |
+    - Quel temps fait-il demain ?
+    - C'est quoi le cours du Bitcoin ?
+    - Qui a gagné la coupe du monde 2022 ?
+    - Donne-moi des news récentes
+    - Trouve-moi un bon resto à Paris
+    - Quelle est la capitale de la Finlande ?
+    - Tu connais ChatGPT ?
+      
   ########
 
 - intent: remerciements
