@@ -83,7 +83,7 @@ if (empty($_SESSION['chat_history'])) {
         </div>
     </div>
     <div class="chat-user-input">
-        <form method="POST" action="">>
+        <form method="POST" action="">
             <!-- Zone de texte -->
             <textarea id="user-input" name="message" placeholder="Envoyer un message au ChatBot" required></textarea>
 
