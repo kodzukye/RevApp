@@ -9,6 +9,19 @@ intents:
   - remerciements
   - prendre_conge
   - famillier
+  - interroger_curiosite
+  - interroger_capacites
+  - interroger_opinion
+  - solliciter_aide_generale
+  - solliciter_clarification
+  - solliciter_information_specifique
+  - demander_contact_humain
+  - exprimer_frustration
+  - exprimer_joie
+  - exprimer_deception
+  - ordonner_service_client
+  - provoquer_insulte
+  - provoquer_moquerie
 
 responses:
   utter_greet:
