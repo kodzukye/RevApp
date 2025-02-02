@@ -117,9 +117,6 @@ responses:
   utter_demander_pdf:
   - text: "Veuillez me donner le chemin du fichier PDF."
 
-  utter_preparer_question:
-  - text: "Veuillez patienter je prépare des questions pour vous."
-
   utter_prendre_conge:
   - text: "Au revoir! A bientôt!"
   - text: "A la prochaine! A bientôt!"
