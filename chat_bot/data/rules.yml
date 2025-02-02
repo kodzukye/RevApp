@@ -83,11 +83,6 @@ rules:
     - action: utter_info_non_disponible
     - action: utter_demander_pdf  # Action custom pour ramener vers les PDF
 
-- rule: Relancer sur les PDF après hors-sujet
-  steps:
-    - intent: demander_info_externe
-    - action: utter_info_non_disponible
-
 # Fallback
 - rule: Politique de fallback
   conversation_start: true
