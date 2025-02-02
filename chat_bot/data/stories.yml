@@ -11,7 +11,7 @@ stories:
   steps:
   - intent: solliciter_clarification
   - action: utter_solliciter_clarification
-  - intent: informer
+  - intent: remerciements
   - action: utter_remerciements
 
 - story: Analyse cours
