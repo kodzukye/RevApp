@@ -32,10 +32,6 @@ nlu:
     - Coucou mon frère
     - Salut mon gars
     - Coucou mon gars
-    - Je t'aime
-    - Je t'adore
-    - Tu es beau
-    - Tu es belle
 
 - intent: famillier
   examples: |
@@ -133,6 +129,10 @@ nlu:
     - Youpi !
     - Génial !
     - Ça déchire !
+    - Je t'aime
+    - Je t'adore
+    - Tu es beau
+    - Tu es belle
 
 - intent: exprimer_deception
   examples: |
