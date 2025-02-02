@@ -65,12 +65,14 @@ if (empty($_SESSION['chat_history'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChatBot Rasa</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="chat-container">
         <div class="chat-header">
+            <img src="../assets/images/icons/nouveau.png" alt="NewChat" class="new-chat-icon">
             <h2>RevAPP</h2>
+            <img src="../assets/images/icons/profil.png" alt="Profile" class="profile-icon">
         </div>
         <div class="chat-box" id="chat-box">
             <?php foreach ($_SESSION['chat_history'] as $chat): ?>
