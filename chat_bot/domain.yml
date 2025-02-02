@@ -1,9 +1,9 @@
 version: "3.1"
 
 intents:
-  - demander_question
   - analyser_cours
   - saluer
+  - amicale
   - moyen_age
   - fournir_chemin_pdf
   - remerciements
@@ -16,6 +16,7 @@ intents:
   - solliciter_clarification
   - solliciter_information_specifique
   - demander_contact_humain
+  - complotiste
   - exprimer_frustration
   - exprimer_joie
   - exprimer_deception
@@ -25,8 +26,6 @@ intents:
   - demander_info_externe
 
 responses:
-  utter_greet:
-  - text: "Hey! How are you?"
 
   utter_saluer:
   - text: "Bonjour! Je suis un chatbot qui peut vous aider à réviser tes cours."
@@ -38,6 +37,13 @@ responses:
   - text: "Salut!"
   - text: "Bonjour!"
   - text: "Coucou!"
+
+
+  utter_amicale:
+  - text: "Salut! Comment ça va?"
+  - text: "Coucou! Comment ça va?"
+
+
 
   utter_moyen_age:
   - text: "Mes hômage ô cher maitre!"
@@ -112,6 +118,10 @@ responses:
   - text: "Pas de quoi! Je suis là pour vous aider."
   - text: "De rien chef! Je suis là pour aider."
   - text: "T'inquiète pas chef! Je suis là pour aider."
+
+
+  utter_complotiste:
+  - text: "Je ne suis pas un complotiste, je suis un chatbot qui peut vous aider à réviser tes cours."
   
 
   utter_demander_pdf:

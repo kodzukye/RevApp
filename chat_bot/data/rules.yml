@@ -112,3 +112,13 @@ rules:
   - intent: famillier
   - action: utter_famillier
 
+- rule: complotiste
+  steps:
+  - intent: complotiste
+  - action: utter_complotiste
+
+- rule: amicale
+  steps:
+  - intent: amicale
+  - action: utter_amicale
+
