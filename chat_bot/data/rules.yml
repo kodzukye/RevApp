@@ -87,7 +87,6 @@ rules:
   steps:
     - intent: demander_info_externe
     - action: utter_info_non_disponible
-    - action: utter_proposer_aide_pdf
 
 # Fallback
 - rule: Politique de fallback
