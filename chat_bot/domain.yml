@@ -42,6 +42,50 @@ responses:
   - text: "Salut chef! Comment tu vas?"
   - text: "Bien ou la famille?"
 
+responses:
+  utter_interroger_curiosite:
+    - text: "Je suis une IA entraînée pour t'assister dans tes révision. Pose-moi toutes tes questions ! 🤖"
+
+  utter_interroger_capacites:
+    - text: "Je peux t'aider à trouver des réviser tes cours en te générant des question, il me faut juste le document de ton cours en format pdf 😊"
+
+  utter_interroger_opinion:
+    - text: "Mon rôle est de t'assister, pas de donner des opinions personnelles. Désolé ! 😅"
+# Je ne sais pas quoi mettre
+  utter_solliciter_aide_generale:
+    - text: "Oula désoler je n'ai pas encore les capacités pour t'aider... 😔\n Dans une prochaine mise a jour peut être 😊"
+# Je ne sais pas quoi mettre
+  utter_solliciter_clarification:
+    - text: "Oula désoler je n'ai pas encore les capacités pour t'aider... 😔\n Dans une prochaine mise a jour peut être 😊"
+
+  utter_solliciter_information_specifique:
+    - text: "Je n'ai pas ce genre d'informations à disposition désolé ! 😅"
+
+  utter_demander_contact_humain:
+    - text: "Pour ça je t'invite a trouver leurs information sur le site... Si elles y sont biensûr 😏 "
+
+  utter_exprimer_frustration:
+    - text: "Je comprend votre frustration, mais étant une simple intéligence artificielle je ne peux rien faire pour changer cela. Vous m'envoyer désolé 😔"
+
+  utter_exprimer_joie:
+    - text: "Super ! Je suis ravi de l'apprendre 🎊"
+
+  utter_exprimer_deception:
+    - text: "Ah mince... Dis-moi comment améliorer ça pour la prochaine fois ? 🛠️"
+
+  utter_ordonner_service_client:
+    - text: "Euh... 😶 Je ne suis pas capable de faire ce genre de choses désolé 😅"
+
+  utter_provoquer_insulte:
+    - text: "Je suis encore en apprentissage, mais je fais de mon mieux pour t'aider 🙏"
+
+  utter_provoquer_moquerie:
+    - text: "Hé, je progresse chaque jour ! Donne-moi une chance de m'améliorer 😊"
+
+  # Fallback par défaut
+  utter_default:
+    - text: "Je n'ai pas bien compris... Peux-tu reformuler différemment s'il te plait ? 😕"
+
 
   utter_remerciements:
   - text: "De rien! Je suis là pour vous aider."

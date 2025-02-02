@@ -53,7 +53,6 @@ nlu:
     - Tranquille
     - Tranquille chef
 
-
 - intent: complotiste
   examples: |
     - Les illuminatis contrôlent le monde
@@ -61,7 +60,113 @@ nlu:
     - Les vaccins sont dangereux
     - La terre est plate
 
+###########
+- intent: interroger_curiosite
+  examples: |
+    - T'es qui toi ?
+    - T'es un programme ou un humain ?
+    - T'es programmé comment ?
+    - Qui t'a codé ?
+    - T'as des parents robots ?
+    - C'est quoi ton origine ?
 
+  - intent: interroger_capacites
+  examples: |
+    - Tu sais faire quoi comme tâches ?
+    - C'est quoi tes fonctions ?
+    - T'es capable de quoi ?
+    - Quelles actions tu gères ?
+    - T'as quelles compétences ?
+
+  - intent: interroger_opinion
+  examples: |
+    - Tu penses quoi des humains ?
+    - T'as une opinion sur [X] ?
+    - T'as une position sur le débat IA ?
+    - T'as une préférence techno ?
+    - T'as une vision sur le futur de l'IA ?
+
+  - intent: solliciter_aide_generale
+  examples: |
+    - J'bloque sur un truc
+    - J'comprends rien, aide-moi
+    - T'as une solution ?
+    - T'as une minute pour m'assister ?
+    - J'suis coincé
+
+  - intent: solliciter_clarification
+  examples: |
+    - J'suis perdu, explique mieux
+    - Répète en plus simple
+    - C'est pas clair ton truc
+    - Parle moins techno
+    - En français cette fois
+
+  - intent: solliciter_information_specifique
+  examples: |
+    - Donne les tarifs du magasin
+    - Où trouver la promo ?
+    - C'est quand la livraison ?
+    - Y a t-il des stocks ?
+    - Où sont mes colis ?
+
+  - intent: demander_contact_humain
+  examples: |
+    - Je veux un vrai conseiller
+    - Passe-moi un humain
+    - Y a quelqu'un de compétent ?
+    - J'veux pas parler à un robot
+    - Contact service client
+
+  - intent: exprimer_frustration
+  examples: |
+    - Ça me gonfle !
+    - C'est n'importe quoi
+    - J'en ai marre
+    - C'est trop lent
+    - J'vais péter un cable
+
+  - intent: exprimer_joie
+  examples: |
+    - J'suis hyper content !
+    - Trop cool !
+    - Youpi !
+    - Génial !
+    - Ça déchire !
+
+  - intent: exprimer_deception
+  examples: |
+    - Quelle déception...
+    - C'est nul
+    - J'm'attendais à mieux
+    - Bof...
+    - Pas ouf
+
+  - intent: ordonner_service_client
+  examples: |
+    - Je veux annuler
+    - Rembourse ma commande
+    - Où est mon remboursement ?
+    - Signale un problème
+    - Réclamation officielle
+
+  - intent: provoquer_insulte
+  examples: |
+    - T'es débile ou quoi ?
+    - T'es buggé ?
+    - T'es mal codé
+    - Naze ce bot
+    - Tu sers à rien
+
+  - intent: provoquer_moquerie
+  examples: |
+    - T'es qu'une machine
+    - Les robots ça vaut rien
+    - T'es pas futé
+    - T'as 2 neurones ?
+    - Même mon chat code mieux
+
+  ########
 
 - intent: remerciements
   examples: |
