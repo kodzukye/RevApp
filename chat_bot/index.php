@@ -69,13 +69,23 @@ if (empty($_SESSION['chat_history'])) {
 </head>
 <body>
     <div class="chat-container">
+        
         <div class="chat-header">
             <img src="../assets/images/icons/nouveau.png" alt="NewChat" class="new-chat-icon">
             <h2>RevAPP</h2>
-            <a href="profil.php" class="profile-link">
-                <img src="../assets/images/icons/profil.png" alt="Profil">
-            </a>
+
+            <div class="profile-menu">
+                <a href="#" class="profile-link">
+                    <img src="../assets/images/icons/profil.png" alt="Profil">
+                </a>
+                <div class="dropdown">
+                    <a href="profil.php">Mon Profil</a>
+                    <a href="logout.php">Se Déconnecter</a>
+                </div>
+            </div>
+
         </div>
+
         <div class="chat-box" id="chat-box">
             <?php foreach ($_SESSION['chat_history'] as $chat): ?>
                 <div class="chat-message <?php echo $chat['sender']; ?>">

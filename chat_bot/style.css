@@ -28,8 +28,8 @@ body {
 }
 
 .profile-icon {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     order: 1;
     margin-right: 2rem;
 }
@@ -44,13 +44,55 @@ body {
 }
 
 .profile-link img {
-    width: 40px;      
-    height: auto;     
+    width: 38px;      
+    height: auto; 
+    margin-right: 2rem;    
 }
 
+.profile-menu {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    right: 0; /* Fait coller le menu à droite */
+    top: 100%; /* Place le menu en dessous de l'icône */
+    background-color: rgba(50, 47, 53, 1);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    min-width: 150px;
+    border-radius: 5px;
+    z-index: 1000; /* Assure qu'il est au-dessus des autres éléments */
+}
+
+@media (max-width: 500px) { /* Ajuste la position sur les petits écrans */
+    .dropdown {
+        left: auto;
+        right: 0;
+    }
+}
+
+
+.dropdown a {
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {
+    background-color: rgb(60, 59, 61);
+}
+
+.profile-menu:hover .dropdown {
+    display: block;
+}
+
+
 .new-chat-icon {
-    width: 30px;
-    height: 30px;
+    width: 38px;
+    height: 38px;
     order: -1;
     margin-left: 2rem;
 }
