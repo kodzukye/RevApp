@@ -114,3 +114,21 @@ textarea {
     width: 30px;
     height: auto;
 }
+
+.profile-link {
+    position: fixed;  
+    top: 20px;       
+    right: 20px;       
+    z-index: 1000;    
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+}
+
+.profile-link img {
+    width: 40px;      
+    height: auto;     
+}

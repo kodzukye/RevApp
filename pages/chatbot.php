@@ -8,6 +8,10 @@
 </head>
 <body>
 
+<a href="profil.php" class="profile-link">
+    <img src="../assets/images/icons/profil.png" alt="Profil">
+</a>
+
 <div class="chat-container">
     <!-- Zone de texte -->
     <textarea id="user-input" placeholder="Envoyer un message au ChatBot"></textarea>
