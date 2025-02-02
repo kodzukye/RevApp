@@ -72,7 +72,9 @@ if (empty($_SESSION['chat_history'])) {
         <div class="chat-header">
             <img src="../assets/images/icons/nouveau.png" alt="NewChat" class="new-chat-icon">
             <h2>RevAPP</h2>
-            <img src="../assets/images/icons/profil.png" alt="Profile" class="profile-icon">
+            <a href="profil.php" class="profile-link">
+                <img src="../assets/images/icons/profil.png" alt="Profil">
+            </a>
         </div>
         <div class="chat-box" id="chat-box">
             <?php foreach ($_SESSION['chat_history'] as $chat): ?>
