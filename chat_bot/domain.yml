@@ -104,9 +104,6 @@ responses:
   utter_parler_meteo:
     - text: "Aucune idée du temps qu'il fait, mais je peux t'aider à analyser des nuages de mots dans ton PDF ! ☁️"
 
-  utter_parler_actualite:
-    - text: "Mon actualité à moi, c'est les mises à jour de ton PDF. On se concentre là-dessus ? 📄"
-
 
   # Fallback par défaut
   utter_default:
