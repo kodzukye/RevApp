@@ -9,6 +9,8 @@ import google.generativeai as genai
 from sentence_transformers import SentenceTransformer, util
 import os
 from dotenv import load_dotenv
+import re
+
 
 load_dotenv()
 
@@ -44,7 +46,7 @@ class PDFAnalyzer:
             Format de sortie : Liste numérotée
             """
             response = self.model.generate_content(prompt)
-            return [q.split('. ', 1)[1] for q in response.text.split('\n') if q]
+            return re.findall(r'\d+\.\s*(.*)', response.text)
         except Exception as e:
             raise RuntimeError(f"Erreur Gemini : {str(e)}")
 
