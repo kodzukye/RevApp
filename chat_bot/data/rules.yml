@@ -122,6 +122,9 @@ rules:
   - intent: amicale
   - action: utter_amicale
 
-
+- rule: humeur_bot
+  steps:
+  - intent: humeur
+  - action: utter_humeur
 
 

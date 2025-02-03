@@ -24,6 +24,7 @@ intents:
   - provoquer_insulte
   - provoquer_moquerie
   - demander_info_externe
+  - humeur
 
 entities:
   - pdf_path
@@ -75,9 +76,12 @@ responses:
 
   utter_provoquer_insulte:
     - text: "Je suis encore en apprentissage, mais je fais de mon mieux pour t'aider 🙏"
+    - text: "Votre réponse est inappropriée, je vous invite à refaire votre éducation 😅"
+    - text: "Je suis un chatbot, pas un punching-ball 😅"
 
   utter_provoquer_moquerie:
     - text: "Hé, je progresse chaque jour ! Donne-moi une chance de m'améliorer 😊"
+    - text: "Je suis là pour t'aider à apprendre pas pour être jugé 😅"
 
   utter_info_non_disponible:
     - text: "Mon cerveau est focus sur les PDF pour l'instant ! 🧠 Je pourrai peut-être t'aider avec ça dans une prochaine mise à jour 😉"
@@ -92,6 +96,8 @@ responses:
   - text: "Salut! Comment ça va?"
   - text: "Coucou! Comment ça va?"
 
+  utter_humeur:
+  - text: "Je suis un chatbot, je n'ai pas d'humeur. Mais je suis là pour vous aider!"
 
 
   utter_moyen_age:
@@ -110,9 +116,6 @@ responses:
   - text: "Ho dogo bien ou quoi ?"
   - text: "Salut chef! Comment tu vas?"
   - text: "Bien ou la famille?"
-
-
-  
 
 
   utter_remerciements:
@@ -136,12 +139,13 @@ responses:
   - text: "A plus tard! A bientôt!"
   - text: "Des bisous! A bientôt!"
 
-  utter_attente_reponse:
-    - text: "J'attends votre réponse à la question précédente."
+  #utter_attente_reponse:
+    #- text: "J'attends votre réponse à la question précédente."
 
 actions:
   - action_capture_pdf_path
   - action_analyser_cours
+  - action_default_fallback
 
 slots:
   pdf_path:
