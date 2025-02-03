@@ -40,36 +40,11 @@ responses:
   - text: "Bonjour!"
   - text: "Coucou!"
 
-
-  utter_amicale:
-  - text: "Salut! Comment ça va?"
-  - text: "Coucou! Comment ça va?"
-
-
-
-  utter_moyen_age:
-  - text: "Mes hômage ô cher maitre!"
-  - text: "Je suis honerer de votre présence!"
-  - text: "Je m'incline face à sa majesté!"
-  - text: "La petitesse de l'humble bot que je suis ne peut rivaliser avec votre grandeur!"
-  - text: "Je salut le maitre de cette conversation!"
-
-  utter_famillier:
-  - text: "Salut chef!"
-  - text: "Bonjour chef!"
-  - text: "ça dit quoi la chienneté ?"
-  - text: "Salut chef! Comment va?"
-  - text: "Bonjour chef! Comment ça va?"
-  - text: "Ho dogo bien ou quoi ?"
-  - text: "Salut chef! Comment tu vas?"
-  - text: "Bien ou la famille?"
-
-
   utter_interroger_curiosite:
     - text: "Je suis une IA entraînée pour t'assister dans tes révision. Pose-moi toutes tes questions ! 🤖"
 
   utter_interroger_capacites:
-    - text: "Je peux t'aider à trouver des réviser tes cours en te générant des question, il me faut juste le document de ton cours en format pdf 😊"
+    - text: "Je peux t'aider à réviser tes cours en te générant des question, il me faut juste le document de ton cours en format pdf 😊"
 
   utter_interroger_opinion:
     - text: "Mon rôle est de t'assister, pas de donner des opinions personnelles. Désolé ! 😅"
@@ -112,6 +87,32 @@ responses:
   # Fallback par défaut
   utter_default:
     - text: "Je n'ai pas bien compris... Peux-tu reformuler différemment s'il te plait ? 😕"
+
+  utter_amicale:
+  - text: "Salut! Comment ça va?"
+  - text: "Coucou! Comment ça va?"
+
+
+
+  utter_moyen_age:
+  - text: "Mes hômage ô cher maitre!"
+  - text: "Je suis honerer de votre présence!"
+  - text: "Je m'incline face à sa majesté!"
+  - text: "La petitesse de l'humble bot que je suis ne peut rivaliser avec votre grandeur!"
+  - text: "Je salut le maitre de cette conversation!"
+
+  utter_famillier:
+  - text: "Salut chef!"
+  - text: "Bonjour chef!"
+  - text: "ça dit quoi la chienneté ?"
+  - text: "Salut chef! Comment va?"
+  - text: "Bonjour chef! Comment ça va?"
+  - text: "Ho dogo bien ou quoi ?"
+  - text: "Salut chef! Comment tu vas?"
+  - text: "Bien ou la famille?"
+
+
+  
 
 
   utter_remerciements:

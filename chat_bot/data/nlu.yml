@@ -14,49 +14,6 @@ nlu:
     - bonsoir!
     - salutations!
 
-- intent: moyen_age
-  examples: |
-    - Salutations très cher
-    - Mes hômages
-    - Bonjour paysan
-
-- intent: amicale
-  examples: |
-    - Salut mon ami
-    - Coucou mon ami
-    - Salut mon pote
-    - Coucou mon pote
-    - Salut mon reuf
-    - Coucou mon reuf
-    - Salut mon frère
-    - Coucou mon frère
-    - Salut mon gars
-    - Coucou mon gars
-
-- intent: famillier
-  examples: |
-    - Salut chef
-    - Bonjour chef
-    - Coucou chef
-    - Salut chef!
-    - Bonjour chef!
-    - Coucou chef!
-    - Bien ou quoi le reuf
-    - Comment va mon reuf
-    - Comment tu vas chef ?
-    - Yo boss tu fais quoi
-    - chef ça dit quoi ?
-    - Tranquille
-    - Tranquille chef
-
-- intent: complotiste
-  examples: |
-    - Les illuminatis contrôlent le monde
-    - Les reptiliens sont parmis nous
-    - Les vaccins sont dangereux
-    - La terre est plate
-
-###########
 - intent: interroger_curiosite
   examples: |
     - T'es qui toi ?
@@ -162,6 +119,7 @@ nlu:
     - Je te hais
     - Je te déteste
     - Je ne t'aime pas du tout
+    - Nique ta mère
 
 - intent: provoquer_moquerie
   examples: |
@@ -182,6 +140,50 @@ nlu:
     - Trouve-moi un bon resto à Paris
     - Quelle est la capitale de la Finlande ?
     - Tu connais ChatGPT ?
+- intent: moyen_age
+  examples: |
+    - Salutations très cher
+    - Mes hômages
+    - Bonjour paysan
+
+- intent: amicale
+  examples: |
+    - Salut mon ami
+    - Coucou mon ami
+    - Salut mon pote
+    - Coucou mon pote
+    - Salut mon reuf
+    - Coucou mon reuf
+    - Salut mon frère
+    - Coucou mon frère
+    - Salut mon gars
+    - Coucou mon gars
+
+- intent: famillier
+  examples: |
+    - Salut chef
+    - Bonjour chef
+    - Coucou chef
+    - Salut chef!
+    - Bonjour chef!
+    - Coucou chef!
+    - Bien ou quoi le reuf
+    - Comment va mon reuf
+    - Comment tu vas chef ?
+    - Yo boss tu fais quoi
+    - chef ça dit quoi ?
+    - Tranquille
+    - Tranquille chef
+
+- intent: complotiste
+  examples: |
+    - Les illuminatis contrôlent le monde
+    - Les reptiliens sont parmis nous
+    - Les vaccins sont dangereux
+    - La terre est plate
+
+###########
+
 
 
   ########
