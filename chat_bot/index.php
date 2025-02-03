@@ -53,9 +53,12 @@ if (!isset($_SESSION['chat_history'])) {
                 <!-- Bouton upload -->
                 <div class="file-upload-container">
                     <label for="file-upload" class="upload-btn">
-                        <img src="../assets/images/icons/fichier.png" alt="Ajouter un fichier" class="upload-icon">
+                        <button onclick="document.getElementById('file-upload').click()">
+                            <img src="../assets/images/icons/fichier.png" alt="Ajouter un fichier" class="upload-icon">
+                        </button>
                     </label>
                     <input type="file" id="file-upload" style="display: none;">
+                    <span id="filename"></span>
                 </div>
 
                 <!-- Bouton audio -->
