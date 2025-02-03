@@ -14,14 +14,12 @@ stories:
   - intent: remerciements
   - action: utter_remerciements
 
-- story: Analyse cours
+- story: Flux de révision complet
   steps:
-  - intent: analyser_cours
-  - action: utter_demander_pdf
   - intent: fournir_chemin_pdf
-    entities:
-    - pdf_path
-  - action: action_capture_pdf_path
   - action: action_analyser_cours
-  - action: action_gerer_reponse
+
+
+
+
 

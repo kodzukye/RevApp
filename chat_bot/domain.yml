@@ -135,33 +135,29 @@ responses:
   - text: "A plus tard! A bientôt!"
   - text: "Des bisous! A bientôt!"
 
+  utter_attente_reponse:
+    - text: "J'attends votre réponse à la question précédente."
+
 actions:
   - action_capture_pdf_path
   - action_analyser_cours
-  - action_gerer_reponse
 
 slots:
   pdf_path:
     type: text
     mappings:
       - type: from_text
-
-  dernier_pdf_analyse:
-    type: text
-    mappings:
-      - type: from_text
-
-  current_question:
-    type: float
-    mappings:
-      - type: custom
-        action: action_gerer_reponse
-
   questions:
     type: list
     mappings:
       - type: custom
-        action: action_analyser_cours
+  
+  current_question:
+    type: float
+    mappings:
+      - type: custom
+  
+
 
 
 

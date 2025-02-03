@@ -1,152 +1,107 @@
-# actions.py
+# actions.py corrigé et optimisé
+
 from rasa_sdk import Action, Tracker
 from rasa_sdk.events import SlotSet
 from rasa_sdk.executor import CollectingDispatcher
-from typing import Text, List, Dict, Any
+from typing import Any, Text, Dict, List
 import fitz  # PyMuPDF
 import google.generativeai as genai
 from sentence_transformers import SentenceTransformer, util
 import os
 from dotenv import load_dotenv
-load_dotenv()  # Charge les variables du fichier .env
 
+load_dotenv()
 
 # Configuration Gemini
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))  # À mettre dans les variables d'environnement
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 MODEL_NAME = 'gemini-1.5-flash'
 SEMANTIC_MODEL = "dangvantuan/sentence-camembert-base"
+MAX_QUESTIONS = 5  # Nombre maximal de questions
 
-class ActionCapturePdfPath(Action):
-    def name(self) -> Text:
-        return "action_capture_pdf_path"
-
-    def run(self, dispatcher, tracker, domain):
-        message = tracker.latest_message.get("text")
-        return [SlotSet("pdf_path", message)]
-
-class ActionAnalysePDF(Action):
+class PDFAnalyzer:
+    """Classe utilitaire partagée pour l'analyse PDF"""
+    
     def __init__(self):
         self.model = genai.GenerativeModel(MODEL_NAME)
         self.semantic_model = SentenceTransformer(SEMANTIC_MODEL)
+        self.questions = []
+        self.current_question_idx = 0
 
-    def name(self) -> Text:
-        return "action_analyser_cours"
-
-    def _extraire_contenu_pdf(self, chemin: Text) -> Text:
-        """Extraction PDF optimisée avec PyMuPDF"""
+    def extraire_contenu_pdf(self, chemin_pdf: str) -> str:
+        """Extrait le contenu textuel d'un PDF"""
         try:
-            doc = fitz.open(chemin)
-            contenu = []
-            for page in doc:
-                text_dict = page.get_text("dict", flags=fitz.TEXT_PRESERVE_LIGATURES)
-                for block in text_dict["blocks"]:
-                    if "lines" in block:
-                        for line in block["lines"]:
-                            line_text = "".join([span["text"] for span in line["spans"]])
-                            contenu.append(line_text)
-            return '\n'.join(contenu)
+            doc = fitz.open(chemin_pdf)
+            return '\n'.join(page.get_text() for page in doc)
         except Exception as e:
-            raise ValueError(f"Erreur lecture PDF : {str(e)}")
+            raise RuntimeError(f"Erreur PDF : {str(e)}")
 
-    def _generer_question(self, contexte: Text) -> Text:
-        """Génération de question via Gemini"""
+    def generer_questions(self, contexte: str) -> List[str]:
+        """Génère les questions via Gemini"""
         try:
-            prompt = f"Génère une question technique en français basée sur : {contexte[:2000]}"
+            prompt = f"""
+            Génère {MAX_QUESTIONS} questions techniques en français basées sur ce contexte :
+            {contexte[:2000]}
+            Format de sortie : Liste numérotée
+            """
             response = self.model.generate_content(prompt)
-            return response.text.strip()
+            return [q.split('. ', 1)[1] for q in response.text.split('\n') if q]
         except Exception as e:
             raise RuntimeError(f"Erreur Gemini : {str(e)}")
 
-    def _generer_reponse_ref(self, question: Text) -> Text:
-        """Génération de la réponse de référence"""
-        try:
-            prompt = f"Donne une réponse concise à : {question}"
-            response = self.model.generate_content(prompt)
-            return response.text.strip()
-        except Exception as e:
-            return "Réponse non disponible"
-
-    def _evaluer_reponse(self, question: Text, reponse: Text, reference: Text) -> bool:
-        """Évaluation sémantique des réponses"""
-        embeddings = self.semantic_model.encode([question, reponse, reference])
-        similarite = util.cos_sim(embeddings[1], embeddings[2]).item()
-        return similarite > 0.65
-
-    async def run(self, dispatcher, tracker, domain):
-        pdf_path = tracker.get_slot("pdf_path")
-        
-        if not pdf_path:
-            dispatcher.utter_message("Veuillez fournir un chemin PDF valide.")
-            return []
-
-        try:
-            contexte = self._extraire_contenu_pdf(pdf_path)
-            questions = [self._generer_question(contexte) for _ in range(5)]
-            
-            # Stocker les questions dans le slot
-            tracker.slots["questions"] = questions
-            tracker.slots["current_question"] = 0
-            
-            # Poser la première question
-            dispatcher.utter_message(f"Question 1: {questions[0]}")
-            return [SlotSet("questions", questions), SlotSet("current_question", 0)]
-
-        except Exception as e:
-            dispatcher.utter_message(f"Erreur : {str(e)}")
-            return []
-# Ajouter en haut du fichier
-# Correction nécessaire
-class PDFUtils:
-    def __init__(self):
-        self.semantic_model = SentenceTransformer(SEMANTIC_MODEL)
-    
-    def evaluer_reponse(self, question: Text, reponse: Text, reference: Text) -> bool:
-        embeddings = self.semantic_model.encode([question, reponse, reference])
-        similarite = util.cos_sim(embeddings[1], embeddings[2]).item()
-        return similarite > 0.65
-
-
-
-class ActionGererReponse(Action):
-    def __init__(self):
-        self.utils = PDFUtils()  # Initialisation correcte
-        self.model = genai.GenerativeModel(MODEL_NAME)
-
-    def name(self) -> Text:
-        return "action_gerer_reponse"
-
-    async def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        current_idx = tracker.get_slot("current_question") or 0
-        questions = tracker.get_slot("questions")
-        
-        if not questions or current_idx >= len(questions):
-            dispatcher.utter_message("Aucune question en cours.")
-            return []
-
-        reponse = tracker.latest_message.get("text")
-        question = questions[current_idx]
-
+    def evaluer_reponse(self, question: str, reponse: str) -> str:
+        """Évalue la réponse utilisateur"""
         try:
             # Génération réponse de référence
             reponse_ref = self.model.generate_content(
-                f"Réponse courte à : {question}"
+                f"Donne la réponse courte à : {question}"
             ).text.strip()
-
-            # Évaluation
-            if self.utils.evaluer_reponse(question, reponse, reponse_ref):
-                dispatcher.utter_message("✅ Correct !")
-            else:
-                dispatcher.utter_message(f"❌ Réponse attendue : {reponse_ref}")
-
-            # Passage à la question suivante
-            if current_idx < len(questions) - 1:
-                new_idx = current_idx + 1
-                dispatcher.utter_message(f"Question {new_idx + 1}: {questions[new_idx]}")
-                return [SlotSet("current_question", new_idx)]
             
-            return [SlotSet("current_question", None), SlotSet("questions", None)]
-
+            # Comparaison sémantique
+            embeddings = self.semantic_model.encode([reponse, reponse_ref])
+            similarite = util.cos_sim(embeddings[0], embeddings[1]).item()
+            
+            return f"✅ Correct !" if similarite > 0.65 else f"❌ Réponse attendue : {reponse_ref}"
         except Exception as e:
-            dispatcher.utter_message(f"Erreur d'évaluation : {str(e)}")
+            return f"Erreur d'évaluation : {str(e)}"
+
+class ActionDemarrerRevision(Action, PDFAnalyzer):
+    def name(self) -> Text:
+        return "action_analyser_cours"
+
+    async def run(self, dispatcher, tracker, domain):
+        try:
+            pdf_path = tracker.get_slot("pdf_path")
+            contexte = self.extraire_contenu_pdf(pdf_path)
+            questions = self.generer_questions(contexte)
+
+            if not questions:
+                raise ValueError("Aucune question générée")
+
+            # Envoi de toutes les questions d'un coup
+            message = "Voici les questions générées :\n\n"
+            for i, question in enumerate(questions, 1):
+                message += f"Question {i}: {question}\n\n"
+
+            dispatcher.utter_message(text=message)
             return []
 
+        except Exception as e:
+            dispatcher.utter_message(text=f"Échec de l'analyse : {str(e)}")
+            return []
+
+
+#class ActionGererReponse(Action):
+#    def name(self) -> Text:
+#        return "action_gerer_reponse"
+
+#    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+#        question_courante = tracker.get_slot("question_courante")
+#        reponse_utilisateur = tracker.latest_message.get("text")
+        
+#        if question_courante:
+#            evaluation = self.evaluer_reponse(question_courante, reponse_utilisateur)
+#            dispatcher.utter_message(text=evaluation)
+#            return [SlotSet("question_courante", None)]
+#        else:
+#            dispatcher.utter_message(text="Désolé, je n'ai pas de question en attente de réponse.")
+#        return []
