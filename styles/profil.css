@@ -1,0 +1,77 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: rgba(39, 39, 39, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.profil-container {
+    display: flex;
+    flex-direction: column; 
+    gap: 30px; 
+}
+
+.coordonnees-container, .password-container {
+    background-color: rgba(50, 47, 53, 1);
+    padding: 20px;
+    border-radius: 0px;
+    width: 800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    height: auto; 
+}
+
+h2 {
+    color: white;
+    margin-bottom: 15px;
+    font-size: 30px;
+}
+
+.input-field {
+    width: 300px; 
+    padding: 10px;
+    border: none;
+    margin-top: 5px; 
+    border-radius: 0px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.input-field::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.input-field:focus {
+    border: 2px solid rgb(0, 0, 0); 
+    outline: none; 
+}
+
+button {
+    width: 300px; 
+    padding: 10px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 20px;
+    background-color: #1b1b1b;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #1b1b1b94;
+}
+
+label {
+    color: white;
+}

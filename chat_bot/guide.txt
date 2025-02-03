@@ -1,0 +1,7 @@
+Comment utiliser rasa:
+
+cd chat_bot
+rasa train
+Dans un autre terminal : cd chat_bot puis rasa run actions 
+Dans le terminal de rasa train : rasa shell --endpoints endpoints.yml
+
